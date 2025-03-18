@@ -1,17 +1,40 @@
-﻿<!-- About Us Section -->
+﻿# Welcome to New Turbo NY
+
+<!-- About Us Section -->
 # About Us
 New Turbo Education is a premier tutoring center based in New York City, dedicated to providing high-quality educational support for students of all ages. Our experienced teachers specialize in SAT, ACT, TOEFL, AP, and other standardized tests, as well as subject-specific tutoring for elementary, middle, and high school students. We aim to help students achieve academic excellence through personalized learning plans and expert guidance.
+
+## Our Programs
+We offer various programs including:
+- SAT/ACT Preparation
+- ESL (English as a Second Language)
+- Writing Courses
+- School Subject Tutoring
+- State Test Preparation
+- Hunter School Preparation
+- Regents Exam Preparation
+
+## Course Levels
+We serve students at all levels:
+- Primary School (1st - 5th grade)
+- Middle School (6th - 8th grade)
+- High School (9th - 12th grade)
+
+## Business Hours
+**Monday - Friday:** 2:00 PM - 6:00 PM
+**Saturday:** 9:00 AM - 2:00 PM
+**Sunday:** 9:00 AM - 4:00 PM
 
 # Basic Information
 **Institution Name:** New Turbo Education
 **Location:** New York City, United State
 **Services:** Provide tutoring service for all grades of students
 
-
 # Contact and Address
 **Address:** 38-08 Union St #12A, Flushing, NY 11354. 
 **Phone Number:** +1 (718)-971-9914
 **Email:** newturbony@gmail.com
+
 
 <!-- Key Highlights Section -->
 # Key Highlights
@@ -52,7 +75,7 @@ New Turbo Education is a premier tutoring center based in New York City, dedicat
 # Success Stories & Testimonials
 * "**New Turbo Education helped me boost my SAT score from 1200 to 1500 in just three months! The teachers are incredibly knowledgeable and supportive.**" – *Alex L., High School Senior*
 
-* "**Thanks to New Turbo’s college admissions consulting, I was accepted into my dream school – Yale University!**" – *Emma T., College Freshman*
+* "**Thanks to New Turbo's college admissions consulting, I was accepted into my dream school – Yale University!**" – *Emma T., College Freshman*
 
 * "**The small class sizes and personalized teaching approach really made a difference in my learning. Highly recommend!**" – *Daniel C., Parent of a Middle School Student*
 
@@ -93,25 +116,25 @@ Ms. Zou completed her undergraduate studies at Cornell University and pursued he
 Ms. Huang graduated from New York University and holds degrees in Education and Child Psychology for her undergraduate and graduate studies, respectively. She is fluent in both English and Chinese, with over ten years of teaching experience, and primarily teaches English courses at New Turbo. Ms. Huang has served as a counselor at Stuyvesant High School and conducted psychological work and related research at various renowned public schools.
 
 ### Ms. Liu
-As the Mathematics Director at New Turbo, Ms. Liu holds a degree in Business Administration. With years of teaching and team-leading experiences , she excels in guiding new teachers and sparking students' interest in learning, whether in group or one-on-one settings, and significantly improving the students’ scores in a short period.
+As the Mathematics Director at New Turbo, Ms. Liu holds a degree in Business Administration. With years of teaching and team-leading experiences , she excels in guiding new teachers and sparking students' interest in learning, whether in group or one-on-one settings, and significantly improving the students' scores in a short period.
 
 ### Mr. Zhang
 Mr. Zhang teaches various AP courses, history, ELA, and ESL courses at New Turbo. His primary teaching language is English. With over ten years of teaching experience, Mr. Zhang instructs students ranging from elementary school to adults. He emphasizes learning techniques and methods, enabling students to grasp essential topics quickly.
 
 ### Mr. Zhu
-Mr. Zhu is one of the primary instructors for New Turbo’s STEM and SAT Math courses, fluent in both Chinese and English. He has participated in several research projects at NYU, having a strong background in STEM fields. At New Turbo, he mainly teaches chemistry, physics, biology, and mathematics, and his students often achieve perfect scores in AP and SAT exams.
+Mr. Zhu is one of the primary instructors for New Turbo's STEM and SAT Math courses, fluent in both Chinese and English. He has participated in several research projects at NYU, having a strong background in STEM fields. At New Turbo, he mainly teaches chemistry, physics, biology, and mathematics, and his students often achieve perfect scores in AP and SAT exams.
 
 ### Ms. Cai
 Ms. Cai completed her undergraduate and graduate studies at University of Pennsylvania and serves as an instructor for integrated subjects and a college admissions consultant at New Turbo. With years of teaching experience, under her guidance, most students have been admitted to Ivy League universities with significant scholarships. Besides teaching, Ms. Cai has also been involved in numerous research projects.
 
 ### Mr. Tan
-Mr. Tan is one of the primary instructors for New Turbo’s SAT English and Writing courses for all grades. He graduated from one of the top thirty liberal arts colleges, Bucknell University, and possesses years of teaching experience. He provides academic training and specializes in educating special-needs children.
+Mr. Tan is one of the primary instructors for New Turbo's SAT English and Writing courses for all grades. He graduated from one of the top thirty liberal arts colleges, Bucknell University, and possesses years of teaching experience. He provides academic training and specializes in educating special-needs children.
 
 ### Ms. Shi
-Ms. Shi is one of the primary instructors for New Turbo’s STEM online courses, having completed her undergraduate studies at Lehigh University, ranked in the top thirty in North America. Fluent in both English and Chinese, she possesses extensive teaching experience and has participated in numerous research projects, accumulating rich theoretical and practical experience in science.
+Ms. Shi is one of the primary instructors for New Turbo's STEM online courses, having completed her undergraduate studies at Lehigh University, ranked in the top thirty in North America. Fluent in both English and Chinese, she possesses extensive teaching experience and has participated in numerous research projects, accumulating rich theoretical and practical experience in science.
 
 ### Ms. Ria 
-Ms. Ria, graduated from University of Pennsylvania, majors in Education and has previously taught at New Oriental. Fluent in both English and Chinese, she is an instructor at New Turbo, mainly teaching elementary school mathematics and creative writing. With teaching experience in various NYC‘s public schools, she is extensively experienced in education.
+Ms. Ria, graduated from University of Pennsylvania, majors in Education and has previously taught at New Oriental. Fluent in both English and Chinese, she is an instructor at New Turbo, mainly teaching elementary school mathematics and creative writing. With teaching experience in various NYC's public schools, she is extensively experienced in education.
 
 ### Ms. Zheng
 Ms. Zheng, a graduate of a top thirty state university with a major in mathematics education, serves as the SAT Mathematics and mathematics instructor for various grade levels at New Turbo. With extensive teaching experience and expertise in tailoring course plans to meet students' needs, she excels in her teaching.
@@ -135,10 +158,10 @@ Mr. Fred Wang graduated from the University of Wisconsin-Madison, ranked among t
 Ms. H. Wang graduated from Fordham University, one of the top thirty business schools in the U.S.. She is a math instructor at New Turbo. With five years of teaching experience, Ms. H. Wang primarily teaches mathematics at all grade levels, along with elementary and middle school reading and writing, leading to significant improvements in students' academic performance under her guidance.
 
 ### Ms. Marry Zou
-Ms. Marry Zou's master's degree is in English Education. She is a patient teacher who designs her lessons to meet students' needs and individual situations, excelling in an encouraging teaching style. Currently, she is primarily responsible for New Turbo’s English courses, covering subjects such as ESL, TOEFL, and from elementary to middle school level English. Her courses are highly appreciated by her students.
+Ms. Marry Zou's master's degree is in English Education. She is a patient teacher who designs her lessons to meet students' needs and individual situations, excelling in an encouraging teaching style. Currently, she is primarily responsible for New Turbo's English courses, covering subjects such as ESL, TOEFL, and from elementary to middle school level English. Her courses are highly appreciated by her students.
 
 ### Mr. Shraman
-Mr. Shraman holds both a master’s and doctoral degree in Arts and Sciences from Ivy League Columbia University and conducts his classes entirely in English. He has participated in numerous seminars, published several academic papers, and has teaching experience at prestigious institutions. At New Breakthrough, he is responsible for standardized test preparation (SAT/ACT/SHSAT Math and English), AP courses (AP Statistics, AP Economics, AP Calculus), and Adult Business English.
+Mr. Shraman holds both a master's and doctoral degree in Arts and Sciences from Ivy League Columbia University and conducts his classes entirely in English. He has participated in numerous seminars, published several academic papers, and has teaching experience at prestigious institutions. At New Breakthrough, he is responsible for standardized test preparation (SAT/ACT/SHSAT Math and English), AP courses (AP Statistics, AP Economics, AP Calculus), and Adult Business English.
 
 ### Ms. Saha
 Ms. Saha is currently teaching at a private school and is one of the lead teachers in her grade level, with over five years of teaching experience. She is patient and professional, conducting her classes entirely in English. At New Breakthrough, she is responsible for subjects including elementary mathematics and science, English for elementary and middle school, SHSAT English, as well as reading, writing, and history courses for various grade levels.
@@ -158,11 +181,11 @@ Ms. Saha is currently teaching at a private school and is one of the lead teache
 
 * If students/parents need to permanently change their class time, students/parents must inform/request the school to do so at least two weeks ahead so the school can schedule such changes. 
 
-* All the courses/curriculum are closely connected and scheduled one after the other. Each class and lesson is attentively prepared by our teachers. Only by learning efficiently and cooperating with your teachers will you make progress and continuously improve. If students miss class time due to personal reasons and leave, course content will not be coherent; or, if students do not complete homework according to teacher’s requirements, the school does not guarantee learning improvements. You are responsible for your own actions, and tuition will not be refundable at that point.
+* All the courses/curriculum are closely connected and scheduled one after the other. Each class and lesson is attentively prepared by our teachers. Only by learning efficiently and cooperating with your teachers will you make progress and continuously improve. If students miss class time due to personal reasons and leave, course content will not be coherent; or, if students do not complete homework according to teacher's requirements, the school does not guarantee learning improvements. You are responsible for your own actions, and tuition will not be refundable at that point.
 
-* Each student/parent will have their corresponding WeChat group. Teachers will regularly provide feedback on such student’s progress and situation. 
+* Each student/parent will have their corresponding WeChat group. Teachers will regularly provide feedback on such student's progress and situation. 
 
-* If you need to ask for leave, please explain the reason and situation at least three days in advance through your corresponding WeChat group. If the student is ill, please provide a doctor’s note for proof of evidence. If in an emergency, please show proof of evidence as well. Otherwise, the regular class hours will be deducted. Students cannot cancel class more than 3 times (except for sickness) during a 50-hours course. 
+* If you need to ask for leave, please explain the reason and situation at least three days in advance through your corresponding WeChat group. If the student is ill, please provide a doctor's note for proof of evidence. If in an emergency, please show proof of evidence as well. Otherwise, the regular class hours will be deducted. Students cannot cancel class more than 3 times (except for sickness) during a 50-hours course. 
 
 * There is no make-up class for small classes. If you ask for leave, you can ask your teacher to provide a class recording.
 
