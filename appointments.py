@@ -14,7 +14,9 @@ AVAILABLE_SLOTS = {
     "Tuesday": ["10:00", "11:00", "14:00", "15:00", "16:00"],
     "Wednesday": ["10:00", "11:00", "14:00", "15:00", "16:00"],
     "Thursday": ["10:00", "11:00", "14:00", "15:00", "16:00"],
-    "Friday": ["10:00", "11:00", "14:00", "15:00", "16:00"]
+    "Friday": ["10:00", "11:00", "14:00", "15:00", "16:00"],
+    "Saturday": ["10:00", "11:00", "14:00"],
+    "Sunday": ["10:00", "11:00", "14:00", "15:00"]
 }
 
 def load_appointments():
@@ -84,25 +86,31 @@ def send_confirmation_email(appointment_data):
     # Create message for user
     user_msg = MIMEMultipart()
     user_msg["From"] = sender_email
-    user_msg["To"] = appointment_data["email"]
-    user_msg["Subject"] = "Appointment Confirmation"
+    user_msg["To"] = f"{appointment_data['email']}, {sender_email}"
+    user_msg["Subject"] = "Appointment Confirmation - New Turbo Education"
     
     user_body = f"""
-    Dear {appointment_data['name']},
+    <b>Dear {appointment_data['name']}</b>,
 
     Your appointment has been confirmed for {appointment_data['date']} at {appointment_data['time']}.
 
-    Appointment Details:
-    Name: {appointment_data['name']}
-    Email: {appointment_data['email']}
-    Phone: {appointment_data['phone']}
-    Date: {appointment_data['date']}
-    Time: {appointment_data['time']}
+    <b>Appointment Details:</b>
+    <b>Name:</b> {appointment_data['name']}
+    <b>Email:</b> {appointment_data['email']}
+    <b>Phone:</b> {appointment_data['phone']}
+    <b>Date:</b> {appointment_data['date']}
+    <b>Time:</b> {appointment_data['time']}
 
-    Thank you for booking with us!
+    <b>Thank you for booking with us!</b>   
+    If you need to reschedule or cancel, please contact us at +1 (718)-971-9914.
+    We look forward to seeing you soon!
+    
+    <b>Best regards,</b>
+    <b><i>New Turbo Education Team</i></b>
+    <b><i>38-08 Union St, Flushing, NY 11354</i></b>
     """
     
-    user_msg.attach(MIMEText(user_body, "plain"))
+    user_msg.attach(MIMEText(user_body, "html"))
 
     # Create message for admin
     admin_msg = MIMEMultipart()
@@ -111,13 +119,13 @@ def send_confirmation_email(appointment_data):
     admin_msg["Subject"] = f"New Appointment: {appointment_data['name']}"
     
     admin_body = f"""
-    New appointment scheduled:
+    <b>New appointment scheduled:</b>
 
-    Name: {appointment_data['name']}
-    Email: {appointment_data['email']}
-    Phone: {appointment_data['phone']}
-    Date: {appointment_data['date']}
-    Time: {appointment_data['time']}
+    <b>Name:</b> {appointment_data['name']}
+    <b>Email:</b> {appointment_data['email']}
+    <b>Phone:</b> {appointment_data['phone']}
+    <b>Date:</b> {appointment_data['date']}
+    <b>Time:</b> {appointment_data['time']}
     """
     
     admin_msg.attach(MIMEText(admin_body, "plain"))
