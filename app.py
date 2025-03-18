@@ -3,28 +3,18 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from openai import OpenAI
 from dotenv import load_dotenv, find_dotenv
-import llama_index
-from llama_index.core import VectorStoreIndex, KeywordTableIndex, SimpleDirectoryReader
-from llama_index.vector_stores.qdrant import QdrantVectorStore
-from llama_index.core.node_parser import SentenceSplitter
-from llama_index.core.ingestion import IngestionPipeline
-from llama_index.readers.file import PyMuPDFReader
+from llama_index.core import VectorStoreIndex, SimpleDirectoryReader
 from llama_index.core import Settings
-from llama_index.core import StorageContext
 from llama_index.core.postprocessor import SentenceTransformerRerank
-from llama_index.core.retrievers import QueryFusionRetriever, RecursiveRetriever
-from llama_index.retrievers.bm25 import BM25Retriever
+from llama_index.core.retrievers import RecursiveRetriever
 from llama_index.core.query_engine import RetrieverQueryEngine
-from llama_index.core.chat_engine import CondenseQuestionChatEngine
 from llama_index.llms.openai import OpenAI as LlamaOpenAI
-from llama_index.embeddings.openai import OpenAIEmbedding
 from llama_index.core.text_splitter import TokenTextSplitter
+from appointments import get_available_slots, save_appointment, send_confirmation_email
 
 import pandas as pd
+import datetime
 
-
-import time
-import json
 
 
 _ = load_dotenv(find_dotenv())
@@ -45,8 +35,11 @@ client = OpenAI()
 # Construct the full path to the prompt file
 
 
-with open("prompt.md", "r", encoding="utf-8") as f:
-    system_prompt = f.read().strip()
+try:
+    with open("prompt.md", "r", encoding="utf-8") as f:
+        system_prompt = f.read().strip()
+except FileNotFoundError:
+    system_prompt = "You are a helpful AI assistant."  # Default fallback prompt
 
 
 
@@ -75,18 +68,13 @@ index = initialize_index()
 
 # Set up retrievers
 vector_retriever = index.as_retriever()
-bm25_retriever = BM25Retriever.from_defaults(index)
 
 # Combine retrievers
 retriever_dict = {
-    "bm25": bm25_retriever,
+    "bm25": vector_retriever,
     "vector": vector_retriever
 }
 hybrid_retriever = RecursiveRetriever(retriever_dict=retriever_dict, root_id="bm25")
-
-
-# Create query engine
-# query_engine = index.as_query_engine(retriever=hybrid_retriever, llm=llm)
 
 
 
@@ -160,13 +148,50 @@ CORS(app)
 
 @app.route('/query', methods=['POST'])
 def answer_query():
-    data = request.json
-    user_query = data.get("query").lower().strip()
-    answer = get_completion(user_query)
-    return app.response_class(
-        response=json.dumps({"answer": answer}, ensure_ascii=False),
-        mimetype="application/json"
-    )
+    try:
+        data = request.json
+        if not data or 'query' not in data:
+            return jsonify({"error": "No query provided"}), 400
+        
+        user_query = data.get("query").lower().strip()
+        answer = get_completion(user_query)
+        return jsonify({"answer": answer})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/schedule', methods=['POST'])
+def handle_scheduling():
+    try:
+        data = request.json
+        action = data.get('action')
+        
+        if action == 'check_availability':
+            date = data.get('date')
+            available_slots = get_available_slots(date)
+            return jsonify({
+                "available_slots": available_slots
+            })
+            
+        elif action == 'book_appointment':
+            appointment_data = {
+                'name': data.get('name'),
+                'email': data.get('email'),
+                'phone': data.get('phone'),
+                'date': data.get('date'),
+                'time': data.get('time'),
+                'created_at': datetime.datetime.now().isoformat()
+            }
+            
+            save_appointment(appointment_data)
+            send_confirmation_email(appointment_data)
+            
+            return jsonify({
+                "success": True,
+                "message": "Appointment scheduled successfully"
+            })
+            
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)
