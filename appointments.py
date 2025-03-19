@@ -36,32 +36,32 @@ class EmailTemplate:
             "user": {
                 "subject": "Appointment Confirmation - New Turbo Education",
                 "body": f"""
-                <b>Dear {appointment_data['name']}</b>,
+                <b>Dear {appointment_data['name']}</b> /n /n,   
 
-                Your appointment has been confirmed for {appointment_data['date']} at {appointment_data['time']}.
+                Your appointment has been confirmed for {appointment_data['date']} at {appointment_data['time']}. /n /n
 
-                <b>Appointment Details:</b>
-                <b>Name:</b> {appointment_data['name']}
-                <b>Email:</b> {appointment_data['email']}
-                <b>Phone:</b> {appointment_data['phone']}
-                <b>Date:</b> {appointment_data['date']}
-                <b>Time:</b> {appointment_data['time']}
+                <b>Appointment Details:</b> /n /n
+                <b>Name:</b> {appointment_data['name']} /n /n
+                <b>Email:</b> {appointment_data['email']} /n /n
+                <b>Phone:</b> {appointment_data['phone']} /n /n
+                <b>Date:</b> {appointment_data['date']} /n /n
+                <b>Time:</b> {appointment_data['time']} /n /n
 
-                <b>Thank you for booking with us!</b>
-                If you need to reschedule or cancel, please contact us at +1 (718)-971-9914.
-                We look forward to seeing you soon!
+                <b>Thank you for booking with us!</b> /n /n
+                If you need to reschedule or cancel, please contact us at +1 (718)-971-9914. /n /n
+                We look forward to seeing you soon! /n /n
                 """
             },
             "admin": {
                 "subject": f"New Appointment: {appointment_data['name']}",
                 "body": f"""
-                <b>New appointment scheduled:</b>
+                <b>New appointment scheduled:</b> /n /n
 
-                <b>Name:</b> {appointment_data['name']}
-                <b>Email:</b> {appointment_data['email']}
-                <b>Phone:</b> {appointment_data['phone']}
-                <b>Date:</b> {appointment_data['date']}
-                <b>Time:</b> {appointment_data['time']}
+                <b>Name:</b> {appointment_data['name']} /n /n
+                <b>Email:</b> {appointment_data['email']} /n /n
+                <b>Phone:</b> {appointment_data['phone']} /n /n
+                <b>Date:</b> {appointment_data['date']} /n /n
+                <b>Time:</b> {appointment_data['time']} /n /n
                 """
             }
         }
@@ -72,24 +72,24 @@ class EmailTemplate:
             "user": {
                 "subject": "Appointment Cancellation Confirmation - New Turbo Education",
                 "body": f"""
-                <b>Dear {appointment_data['name']}</b>,
+                <b>Dear {appointment_data['name']}</b> /n /n,
 
-                Your appointment for {appointment_data['date']} at {appointment_data['time']} has been cancelled.
+                Your appointment for {appointment_data['date']} at {appointment_data['time']} has been cancelled. /n /n
 
-                If you would like to schedule a new appointment, please contact us or use our booking system.
+                If you would like to schedule a new appointment, please contact us or use our booking system. /n /n
                 """
             },
             "admin": {
                 "subject": f"Appointment Cancelled: {appointment_data['name']}",
                 "body": f"""
-                <b>Appointment cancelled:</b>
+                <b>Appointment cancelled:</b> /n /n
 
-                <b>Name:</b> {appointment_data['name']}
-                <b>Email:</b> {appointment_data['email']}
-                <b>Phone:</b> {appointment_data['phone']}
-                <b>Date:</b> {appointment_data['date']}
-                <b>Time:</b> {appointment_data['time']}
-                <b>Cancelled at:</b> {appointment_data.get('cancelled_at')}
+                <b>Name:</b> {appointment_data['name']} /n /n   
+                <b>Email:</b> {appointment_data['email']} /n /n
+                <b>Phone:</b> {appointment_data['phone']} /n /n
+                <b>Date:</b> {appointment_data['date']} /n /n
+                <b>Time:</b> {appointment_data['time']} /n /n
+                <b>Cancelled at:</b> {appointment_data.get('cancelled_at')} /n /n
                 """
             }
         }
