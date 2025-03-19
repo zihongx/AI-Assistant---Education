@@ -32,21 +32,21 @@ if user_input := st.chat_input("Type your message..."):
     with st.chat_message("user"):
         st.markdown(user_input)
 
-    # Check for appointment scheduling command
-    if user_input.lower().strip() in ['schedule appointment', 'book appointment', 'make appointment']:
-        st.session_state['scheduling_state'] = 'date_selection'
-        chatbot_reply = "Let's schedule your appointment. Please select a date below."
-    else:
-        # Regular chat flow
-        try:
-            response = requests.post(
-                f"{API_URL}/query",
-                json={"query": user_input}
-            )
-            response.raise_for_status()
-            chatbot_reply = response.json().get("answer", "Sorry, I didn't understand that.")
-        except requests.exceptions.RequestException as e:
-            chatbot_reply = f"Error communicating with the server: {str(e)}"
+    # Regular chat flow with intent detection
+    try:
+        response = requests.post(
+            f"{API_URL}/query",
+            json={"query": user_input}
+        )
+        response.raise_for_status()
+        response_data = response.json()
+        chatbot_reply = response_data.get("answer", "Sorry, I didn't understand that.")
+        
+        # Check if the response indicates appointment intent
+        if response_data.get("intent") == "schedule_appointment":
+            st.session_state['scheduling_state'] = 'date_selection'
+    except requests.exceptions.RequestException as e:
+        chatbot_reply = f"Error communicating with the server: {str(e)}"
 
     # Append bot response to chat history
     st.session_state["messages"].append({"role": "assistant", "content": chatbot_reply})
