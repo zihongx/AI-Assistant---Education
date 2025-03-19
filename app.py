@@ -10,14 +10,14 @@ from llama_index.core.retrievers import RecursiveRetriever
 from llama_index.core.query_engine import RetrieverQueryEngine
 from llama_index.llms.openai import OpenAI as LlamaOpenAI
 from llama_index.core.text_splitter import TokenTextSplitter
-from appointments import get_available_slots, save_appointment, send_confirmation_email
+from appointments import appointment_manager  
 import json
 
 import pandas as pd
 import datetime
 import requests
 
-# Add at the top of the file
+
 CONFIG = {
     'MODEL_NAME': 'gpt-4o-mini',  # or 'gpt-3.5-turbo'
     'CONFIDENCE_THRESHOLD': 0.7,
@@ -163,13 +163,13 @@ def detect_intent(user_query):
         print(f"Error in detect_intent: {str(e)}")
         return {"intent": "general_query", "confidence": 0.0, "explanation": "Error in intent detection"}
 
-def get_completion(user_input, response_format="text", model="gpt-4o-mini"):
+def get_completion(user_input, response_format="text", model="gpt-4o-mini", conversation_history=None):
     try:
         # Get relevant context from the index
         response = query_engine.query(user_input)
         
-        print("🔍 Query Sent to OpenAI:", user_input)
-        print("📝 Context Retrieved:", response)
+        # print("🔍 Query Sent to OpenAI:", user_input)
+        # print("📝 Context Retrieved:", response)
         
         # Detect intent directly without HTTP request
         intent_data = detect_intent(user_input)
@@ -180,17 +180,27 @@ def get_completion(user_input, response_format="text", model="gpt-4o-mini"):
             context = f"{response.response}\n\nAdditional pricing information:\n{price_info}"
         else:
             context = response.response
+
+        # Format conversation history if available
+        history_context = ""
+        if conversation_history:
+            history_context = "Previous conversation:\n"
+            for msg in conversation_history:
+                role = "User" if msg["role"] == "user" else "Assistant"
+                history_context += f"{role}: {msg['content']}\n"
+            history_context += "\n"
         
-        # Construct prompt with retrieved context
-        augmented_prompt = f"""Based on the following context and your knowledge as an AI assistant, please answer the question.
+        # Construct prompt with retrieved context and conversation history
+        augmented_prompt = f"""Based on the following context, conversation history, and your knowledge as an AI assistant, please answer the question.
         If the answer cannot be found in the context, say 'I am not sure, but you can contact our support at 718-971-9914 or newturbony@gmail.com.'
         
+        {history_context}
         Context: {context}
         
         Question: {user_input}
         """
         
-        print("📢 Final Prompt to OpenAI:", augmented_prompt)
+        # print("📢 Final Prompt to OpenAI:", augmented_prompt)
         
         messages = [
             {"role": "system", "content": system_prompt},
@@ -239,6 +249,7 @@ def answer_query():
             return jsonify({"error": "No query provided"}), 400
         
         user_query = data.get("query").lower().strip()
+        conversation_history = data.get("conversation_history", [])
         
         # Detect intent directly
         intent_data = detect_intent(user_query)
@@ -251,7 +262,7 @@ def answer_query():
             })
         
         # Otherwise proceed with regular query
-        answer = get_completion(user_query)
+        answer = get_completion(user_query, conversation_history=conversation_history)
         return jsonify({
             "answer": answer, 
             "intent": intent_data.get("intent", "general_query")
@@ -268,7 +279,7 @@ def handle_scheduling():
         
         if action == 'check_availability':
             date = data.get('date')
-            available_slots = get_available_slots(date)
+            available_slots = appointment_manager.get_available_slots(date)
             return jsonify({
                 "available_slots": available_slots
             })
@@ -283,13 +294,36 @@ def handle_scheduling():
                 'created_at': datetime.datetime.now().isoformat()
             }
             
-            save_appointment(appointment_data)
-            send_confirmation_email(appointment_data)
-            
+            appointment_manager.save_appointment(appointment_data)
             return jsonify({
                 "success": True,
                 "message": "Appointment scheduled successfully"
             })
+            
+    except ValueError as e:
+        return jsonify({"error": str(e)}), 400
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/cancel_appointment', methods=['POST'])
+def handle_cancellation():
+    try:
+        data = request.json
+        if not data or 'email' not in data or 'date' not in data or 'time' not in data:
+            return jsonify({"error": "Missing required fields"}), 400
+        
+        result = appointment_manager.cancel_appointment(data)
+        
+        if result.get('success'):
+            return jsonify({
+                "success": True,
+                "message": "Appointment cancelled successfully"
+            })
+        else:
+            return jsonify({
+                "success": False,
+                "message": result.get('message', "Appointment not found")
+            }), 404
             
     except Exception as e:
         return jsonify({"error": str(e)}), 500
