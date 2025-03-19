@@ -92,22 +92,22 @@ def send_confirmation_email(appointment_data):
     user_body = f"""
     <b>Dear {appointment_data['name']}</b>,
 
-    Your appointment has been confirmed for {appointment_data['date']} at {appointment_data['time']}.
+    Your appointment has been confirmed for {appointment_data['date']} at {appointment_data['time']}./n
 
-    <b>Appointment Details:</b>
-    <b>Name:</b> {appointment_data['name']}
-    <b>Email:</b> {appointment_data['email']}
-    <b>Phone:</b> {appointment_data['phone']}
-    <b>Date:</b> {appointment_data['date']}
-    <b>Time:</b> {appointment_data['time']}
+    <b>Appointment Details:</b>/n
+    <b>Name:</b> {appointment_data['name']}/n
+    <b>Email:</b> {appointment_data['email']}/n
+    <b>Phone:</b> {appointment_data['phone']}/n
+    <b>Date:</b> {appointment_data['date']}/n
+    <b>Time:</b> {appointment_data['time']}/n
 
-    <b>Thank you for booking with us!</b>   
-    If you need to reschedule or cancel, please contact us at +1 (718)-971-9914.
-    We look forward to seeing you soon!
+    <b>Thank you for booking with us!</b>/n
+    If you need to reschedule or cancel, please contact us at +1 (718)-971-9914./n
+    We look forward to seeing you soon!/n
     
-    <b>Best regards,</b>
-    <b><i>New Turbo Education Team</i></b>
-    <b><i>38-08 Union St, Flushing, NY 11354</i></b>
+    <b>Best regards,</b>/n
+    <b><i>New Turbo Education Team</i></b>/n
+    <b><i>38-08 Union St, Flushing, NY 11354</i></b>/n
     """
     
     user_msg.attach(MIMEText(user_body, "html"))
@@ -119,16 +119,16 @@ def send_confirmation_email(appointment_data):
     admin_msg["Subject"] = f"New Appointment: {appointment_data['name']}"
     
     admin_body = f"""
-    <b>New appointment scheduled:</b>
+    <b>New appointment scheduled:</b>/n
 
-    <b>Name:</b> {appointment_data['name']}
-    <b>Email:</b> {appointment_data['email']}
-    <b>Phone:</b> {appointment_data['phone']}
-    <b>Date:</b> {appointment_data['date']}
-    <b>Time:</b> {appointment_data['time']}
+    <b>Name:</b> {appointment_data['name']}/n
+    <b>Email:</b> {appointment_data['email']}/n
+    <b>Phone:</b> {appointment_data['phone']}/n
+    <b>Date:</b> {appointment_data['date']}/n
+    <b>Time:</b> {appointment_data['time']}/n
     """
     
-    admin_msg.attach(MIMEText(admin_body, "plain"))
+    admin_msg.attach(MIMEText(admin_body, "html"))
 
     # Send emails
     with smtplib.SMTP(smtp_server, smtp_port) as server:
