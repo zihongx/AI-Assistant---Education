@@ -7,7 +7,7 @@ db_path = os.path.join(os.getcwd(), "data", "appointments.db")
 # Ensure directory exists
 os.makedirs(os.path.dirname(db_path), exist_ok=True)
 
-# Connect to SQLite database (will be stored in data/appointments.db)
+# Connect to SQLite database 
 conn = sqlite3.connect(db_path)
 cursor = conn.cursor()
 
@@ -16,6 +16,7 @@ cursor.execute('''
 CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
+    email TEXT NOT NULL UNIQUE,
     phone TEXT NOT NULL UNIQUE
 )
 ''')
