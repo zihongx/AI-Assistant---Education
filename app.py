@@ -12,6 +12,7 @@ from llama_index.llms.openai import OpenAI as LlamaOpenAI
 from llama_index.core.text_splitter import TokenTextSplitter
 from appointments import appointment_manager  
 import json
+import sqlite3
 
 import pandas as pd
 import datetime
@@ -275,11 +276,14 @@ def answer_query():
 def handle_scheduling():
     try:
         data = request.json
+        print(f"Received scheduling request: {data}")  # Debug log
         action = data.get('action')
         
         if action == 'check_availability':
             date = data.get('date')
+            print(f"Checking availability for date: {date}")  # Debug log
             available_slots = appointment_manager.get_available_slots(date)
+            print(f"Available slots: {available_slots}")  # Debug log
             return jsonify({
                 "available_slots": available_slots
             })
@@ -290,19 +294,69 @@ def handle_scheduling():
                 'email': data.get('email'),
                 'phone': data.get('phone'),
                 'date': data.get('date'),
-                'time': data.get('time'),
-                'created_at': datetime.datetime.now().isoformat()
+                'time': data.get('time')
             }
+            print(f"Attempting to save appointment: {appointment_data}")  # Debug log
             
-            appointment_manager.save_appointment(appointment_data)
-            return jsonify({
-                "success": True,
-                "message": "Appointment scheduled successfully"
-            })
+            try:
+                # Validate the data before saving
+                if not all([appointment_data['name'], appointment_data['email'], 
+                          appointment_data['phone'], appointment_data['date'], 
+                          appointment_data['time']]):
+                    raise ValueError("Missing required fields")
+                
+                # Check if the date is valid
+                try:
+                    datetime.datetime.strptime(appointment_data['date'], '%Y-%m-%d')
+                except ValueError:
+                    raise ValueError("Invalid date format")
+                
+                # Check if the time is valid
+                try:
+                    datetime.datetime.strptime(appointment_data['time'], '%H:%M')
+                except ValueError:
+                    raise ValueError("Invalid time format")
+                
+                # Initialize database if it doesn't exist
+                if not os.path.exists('data/appointments.db'):
+                    print("Database not found, initializing...")
+                    os.makedirs('data', exist_ok=True)
+                    with sqlite3.connect('data/appointments.db') as conn:
+                        cursor = conn.cursor()
+                        cursor.execute("""
+                            CREATE TABLE IF NOT EXISTS users (
+                                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                name TEXT NOT NULL,
+                                email TEXT UNIQUE NOT NULL,
+                                phone TEXT NOT NULL
+                            )
+                        """)
+                        cursor.execute("""
+                            CREATE TABLE IF NOT EXISTS appointments (
+                                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                user_id INTEGER NOT NULL,
+                                appointment_time DATETIME NOT NULL UNIQUE,
+                                status TEXT CHECK(status IN ('scheduled', 'canceled')) DEFAULT 'scheduled',
+                                FOREIGN KEY (user_id) REFERENCES users (id)
+                            )
+                        """)
+                        conn.commit()
+                
+                appointment_manager.save_appointment(appointment_data)
+                print("Appointment saved successfully")  # Debug log
+                return jsonify({
+                    "success": True,
+                    "message": "Appointment scheduled successfully"
+                })
+            except Exception as e:
+                print(f"Error saving appointment: {str(e)}")  # Debug log
+                return jsonify({
+                    "success": False,
+                    "message": str(e)
+                }), 400
             
-    except ValueError as e:
-        return jsonify({"error": str(e)}), 400
     except Exception as e:
+        print(f"Unexpected error: {str(e)}")  # Debug log
         return jsonify({"error": str(e)}), 500
 
 @app.route('/cancel_appointment', methods=['POST'])
@@ -324,6 +378,65 @@ def handle_cancellation():
                 "success": False,
                 "message": result.get('message', "Appointment not found")
             }), 404
+            
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/check_appointments', methods=['POST'])
+def check_appointments():
+    try:
+        data = request.json
+        if not data or 'email' not in data:
+            return jsonify({"error": "Email is required"}), 400
+            
+        with appointment_manager.get_db_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute("""
+                SELECT 
+                    u.name,
+                    u.email,
+                    u.phone,
+                    date(a.appointment_time) as date,
+                    strftime('%H:%M', a.appointment_time) as time,
+                    a.status
+                FROM appointments a
+                JOIN users u ON a.user_id = u.id
+                WHERE u.email = ?
+                AND a.status = 'scheduled'
+                ORDER BY a.appointment_time
+            """, (data['email'],))
+            
+            appointments = []
+            for row in cursor.fetchall():
+                appointments.append({
+                    'name': row[0],
+                    'email': row[1],
+                    'phone': row[2],
+                    'date': row[3],
+                    'time': row[4],
+                    'status': row[5]
+                })
+                
+            return jsonify({
+                "success": True,
+                "appointments": appointments
+            })
+            
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/appointment_history', methods=['POST'])
+def get_appointment_history():
+    try:
+        data = request.json
+        if not data or 'email' not in data:
+            return jsonify({"error": "Email is required"}), 400
+            
+        appointments = appointment_manager.get_appointment_history(data['email'])
+        return jsonify({
+            "success": True,
+            "appointments": appointments
+        })
             
     except Exception as e:
         return jsonify({"error": str(e)}), 500
