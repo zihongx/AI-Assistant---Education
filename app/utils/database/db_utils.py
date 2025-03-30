@@ -73,3 +73,8 @@ def get_db_connection():
     except Exception as e:
         logger.error(f"Failed to connect to database: {str(e)}")
         raise 
+
+if __name__ == "__main__":
+    init_db()
+    
+

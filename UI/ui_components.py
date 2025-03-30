@@ -68,7 +68,7 @@ def display_appointment_history(appointments: List[Dict[str, Union[str, dict]]])
     
     # Display active appointments first with cancel buttons
     if active_appointments:
-        st.markdown("#### Active Appointments | 活跃预约")
+        st.markdown("#### Active Appointments | 预约")
         for i, appt in enumerate(active_appointments):
             if display_active_appointment_card(i, appt):
                 # If cancel button was clicked, reset relevant states
@@ -77,11 +77,11 @@ def display_appointment_history(appointments: List[Dict[str, Union[str, dict]]])
                 st.rerun()
     
     # Display history table for all appointments
-    st.markdown("#### All Appointments | 所有预约")
+    st.markdown("#### All Appointments | 历史预约")
     display_appointment_history_table(appointments)
     
     # Add back to main menu button
-    if st.button("Back to Main Menu | 返回主菜单", key="history_back_btn", use_container_width=True):
+    if st.button("Back to Main Menu | 返回主界面", key="history_back_btn", use_container_width=True):
         reset_states()
         st.rerun()
 
@@ -174,7 +174,7 @@ def create_cancellation_message(user_info: Dict[str, str], date: str, time: str)
     
     Dear {user_info['name']},
     
-    Your appointment has been successfully cancelled:
+    Your appointment has been successfully cancelled | 您的预约已成功取消:
     • Date | 日期: {date}
     • Time | 时间: {time}
     
@@ -202,7 +202,6 @@ I'm your AI assistant, here to help you with:
 • Schedule new appointments
 • Cancel existing appointments
 • Check appointment status
-• Reschedule (by canceling and booking new)
 
 📚 **Courses & Programs**
 • SAT, AP, ACT, SHSAT preparation
@@ -226,7 +225,6 @@ How can I assist you today?
 • 预约新课程
 • 取消现有预约
 • 查询预约状态
-• 更改预约时间（先取消再重新预约）
 
 📚 **课程与项目**
 • SAT、AP、ACT、SHSAT备考
