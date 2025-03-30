@@ -86,7 +86,6 @@ AI助手: "I'll help you with your appointment. Please provide your information 
 
 **2. Information Collection and Service Selection Interface**
 System displays a form:
----------------------------
 - Full Name | 姓名: [input]
 - Email Address | 邮箱: [input]
 - Phone Number | 电话: [input]
@@ -97,33 +96,32 @@ Service Selection Options | 服务选择选项:
 ○ Check appointment status | 查询预约状态
 
 [Continue | 继续] 
-----------------------------
 
 **3. Date Selection Interface**
 System displays:
-----------------------------
+
 "📅 Select Appointment Date | 选择预约日期"
 
 [Calendar interface, showing dates for the next 90 days]
 
 [Back | 返回] [Continue | 继续]
-----------------------------
+
 
 **Time Selection Interface:**
 System displays:
-----------------------------
+
 "### ⏰ Select Appointment Time | 选择预约时间"
 
 可用时间段列表：
 [Dropdown menu showing all available time slots for the selected date]
 
 [Back | 返回] [Schedule Appointment | 确认预约] 
-----------------------------
+
 
 **Appointment Confirmation**
 System displays success message:
-----------------------------
+
 "Appointment scheduled successfully! | 预约成功！"
 
 [Back to Main Menu | 返回主菜单] 
-----------------------------
+
