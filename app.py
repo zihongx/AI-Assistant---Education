@@ -698,5 +698,5 @@ if __name__ == '__main__':
     logger.info("Starting application...")
     init_db()
     logger.info("Database initialized")
-    app.run(debug=True)
+    app.run(host='127.0.0.1', port=5000, debug=True, use_reloader=False)
    

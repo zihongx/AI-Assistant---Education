@@ -136,13 +136,13 @@ def create_confirmation_message(user_info, date, time):
 #### 📋 Appointment Details | 预约详情
 ---
 **👤 Personal Information | 个人信息**
-• **Name | 姓名:** {user_info['name']}
-• **Email | 邮箱:** {user_info['email']}
-• **Phone | 电话:** {user_info['phone']}
+- **Name | 姓名:** {user_info['name']}
+- **Email | 邮箱:** {user_info['email']}
+- **Phone | 电话:** {user_info['phone']}
 
 **📅 Schedule | 时间安排**
-• **Date | 日期:** {date}
-• **Time | 时间:** {time}
+- **Date | 日期:** {date}
+- **Time | 时间:** {time}
 
 ---
 📧 A confirmation email has been sent to your email address.
@@ -169,28 +169,34 @@ def create_cancellation_message(user_info: Dict[str, str], date: str, time: str)
     Returns:
         Formatted message string
     """
-    return f"""
-    ✅ Appointment Cancelled Successfully | 预约已成功取消
-    
-    Dear {user_info['name']},
-    
-    Your appointment has been successfully cancelled | 您的预约已成功取消:
-    • Date | 日期: {date}
-    • Time | 时间: {time}
-    
-    If you would like to schedule a new appointment, please:
-    • Call us at +1 (718)-971-9914
-    • Email us at newturbony@gmail.com
-    • Or visit our website to book online
-    
-    如果您想重新预约，请：
-    • 致电 +1 (718)-971-9914
-    • 发送邮件至 newturbony@gmail.com
-    • 或访问我们的网站进行在线预约
-    
-    Thank you for your understanding.
-    感谢您的理解。
-    """
+    return f"""### ✅ Appointment Cancelled Successfully | 预约已成功取消
+
+#### 📋 Cancellation Details | 取消详情
+---
+**👤 Personal Information | 个人信息**
+- **Name | 姓名:** {user_info['name']}
+- **Email | 邮箱:** {user_info['email']}
+
+**📅 Cancelled Appointment | 已取消的预约**
+- **Date | 日期:** {date}
+- **Time | 时间:** {time}
+
+**📧 A confirmation email has been sent to your email address. 确认邮件已发送至您的邮箱。**
+
+
+#### 🔄 Would you like to schedule a new appointment? | 是否需要重新预约
+---
+You can:
+- 📱 Call us at: +1 (718)-971-9914
+- ✉️ Email us at: newturbony@gmail.com
+- 🌐 Visit our website to book online
+
+您可以：
+- 📱 致电：+1 (718)-971-9914
+- ✉️ 发送邮件至：newturbony@gmail.com
+- 🌐 访问我们的网站进行在线预约
+
+Thank you for your understanding. | 感谢您的理解。"""
 
 def get_welcome_message():
     """Get the welcome message for new users"""

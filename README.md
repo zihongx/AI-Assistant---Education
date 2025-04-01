@@ -78,26 +78,33 @@ streamlit run UI/ui.py # frontend
 
 
 ---
-## Appointment Scheduling Use Case 
+## 📌 Appointment Scheduling Use Case 
 **1. Initial Interaction**
 User: "I would like to schedule an SAT course"
+
 AI助手: "I'll help you with your appointment. Please provide your information and select what you'd like to do below:
+
 我将帮您处理预约事宜。请在下方提供您的信息并选择您想进行的操作："
 
 **2. Information Collection and Service Selection Interface**
+
 System displays a form:
+
 - Full Name | 姓名: [input]
 - Email Address | 邮箱: [input]
 - Phone Number | 电话: [input]
 
 Service Selection Options | 服务选择选项:
-○ Schedule a new appointment | 预约新课程
-○ Cancel an existing appointment | 取消现有预约
-○ Check appointment status | 查询预约状态
+
+* Schedule a new appointment | 预约新课程
+* Cancel an existing appointment | 取消现有预约
+* Check appointment status | 查询预约状态
 
 [Continue | 继续] 
 
+
 **3. Date Selection Interface**
+
 System displays:
 
 "📅 Select Appointment Date | 选择预约日期"
@@ -107,10 +114,10 @@ System displays:
 [Back | 返回] [Continue | 继续]
 
 
-**Time Selection Interface:**
+**4. Time Selection Interface:**
 System displays:
 
-"### ⏰ Select Appointment Time | 选择预约时间"
+"⏰ Select Appointment Time | 选择预约时间"
 
 可用时间段列表：
 [Dropdown menu showing all available time slots for the selected date]
@@ -118,7 +125,8 @@ System displays:
 [Back | 返回] [Schedule Appointment | 确认预约] 
 
 
-**Appointment Confirmation**
+**5. Appointment Confirmation**
+
 System displays success message:
 
 "Appointment scheduled successfully! | 预约成功！"
